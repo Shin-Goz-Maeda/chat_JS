@@ -24,7 +24,7 @@ main {
   display: flex;
   margin: 10px auto;
   background-color: white;
-  border-radius: 0 7px 0 0px;
+  border-radius: 7px 7px 0 0px;
 }
 
 #userImg {
@@ -80,11 +80,13 @@ main {
   border-radius: 7px;
   color: 	#333333;
   letter-spacing: 2px;
+  overflow-wrap: break-word;
 }
 
 
 
 .OtherMessageBox {
+  display: inline-block;
   width: 70%;
   margin-left: 0;
   margin-right: auto;
@@ -92,6 +94,7 @@ main {
 }
 
 .OtherMessageBox .time {
+  display: inline-block;
   text-align: left;
   color: #BBBBBB;
   padding: 5px 0;
@@ -105,8 +108,8 @@ main {
   border-radius: 7px;
   color: 	#333333;
   letter-spacing: 2px;
+  overflow-wrap: break-word;
 }
-
 
 
 #writeArea {
@@ -125,6 +128,7 @@ main {
   border: none;
   font-size: 18px;
   letter-spacing: 2px;
+  overflow-wrap: break-word;
 }
 
 #button {
