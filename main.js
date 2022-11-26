@@ -1,35 +1,37 @@
-// 各要素DOM取得
+// 共通する要素のDOMを取得
 const btn = document.getElementById('button');
 const chat = document.getElementById('chat');
-const MyMessageBox = document.getElementById('MyMessageBox');
-const OtherMessageBox = document.getElementById('OtherMessageBox');
+const textarea = document.getElementById('textarea');
 
+// どちらが送信したのか判別するための変数
 let isMyself = true;
 
+
+// 自分が送信する際の処理
 function mySend() {
-  // 入力されたテキストを取得
-  const textarea = document.getElementById('textarea');
+  if (textarea.value !== "") {
+      // textareaに入力されたテキストを取得
   let Message = textarea.value;
   
-  // メッセージのdiv要素を生成
+  // #chatの子要素になるdiv要素を生成しクラスを付与
   const MessageBox = document.createElement('div');
   MessageBox.classList.add('MyMessageBox');
 
-  // timeのdiv要素を生成
+  // #chat > .MyMessageBoxの子要素になるdivを生成し、クラスを付与
   const time = document.createElement('div');
   time.classList.add('time');
 
-  // timeに現在の時刻を入れる
-  time.textContent = showTime();
+  // .timeに現在の時間を表示する関数を代入
+  time.textContent = showTime() + " " + "Me";
 
-  // sentMessageのdiv要素を生成
+  // #chat > .MyMessageBoxの子要素になるdivを生成
   const sentMessage = document.createElement('div');
 
-  // Messageのpを生成
+  // .MyMessageBox > sentMessageの子要素になるpタグを生成し、クラスを付与
   const myMessage = document.createElement('p');
   myMessage.classList.add('myMessage');
 
-  // テキストをpに格納
+  // textareaに入力されたテキストをpタグに格納
   myMessage.textContent = Message;
 
   // 各要素を格納
@@ -38,36 +40,43 @@ function mySend() {
   MessageBox.appendChild(sentMessage);
   chat.appendChild(MessageBox);
 
+  // 送信ボタンをクリックしたらtextareaを空にする
   textarea.value = "";
 
+  // 交互に送信するために変数を変更
   isMyself = false;
+
+  // ページの最下部に画面を固定
+  MessageBox.scrollIntoView(false);
+  }
 }
 
 
+//  相手が送信する際の処理
 function otherSend() {
-  // 入力されたテキストを取得
-  const textarea = document.getElementById('textarea');
+  if (textarea.value !== "") {
+      // textareaに入力されたテキストを取得
   let Message = textarea.value;
   
-  // メッセージのdiv要素を生成
+  // #chatの子要素になるdiv要素を生成しクラスを付与
   const MessageBox = document.createElement('div');
   MessageBox.classList.add('OtherMessageBox');
 
-  // timeのdiv要素を生成
+  // #chat > .OtherMessageBoxの子要素になるdivを生成し、クラスを付与
   const time = document.createElement('div');
   time.classList.add('time');
 
-  // timeに現在の時刻を入れる
+  // #chat > .OtherMessageBoxの子要素になるdivを生成
   time.textContent = showTime();
 
-  // sentMessageのdiv要素を生成
+  // #chat > .OtherMessageBoxの子要素になるdivを生成
   const sentMessage = document.createElement('div');
 
-  // Messageのpを生成
+  // .otherMessageBox > sentMessageの子要素になるpタグを生成し、クラスを付与
   const otherMessage = document.createElement('p');
   otherMessage.classList.add('otherMessage');
 
-  // テキストをpに格納
+  // textareaに入力されたテキストをpタグに格納
   otherMessage.textContent = Message;
 
   // 各要素を格納
@@ -76,17 +85,24 @@ function otherSend() {
   MessageBox.appendChild(sentMessage);
   chat.appendChild(MessageBox);
 
+  // 送信ボタンをクリックしたらtextareaを空にする
   textarea.value = "";
 
+  // 交互に送信するために変数を変更
   isMyself = true;
+
+  // ページの最下部に画面を固定
+  MessageBox.scrollIntoView(false);
+  }
 }
 
-// 現在の時刻を取得
+
+// 現在の時間を取得
 function showTime() {
   let now = new Date();
   let hour = now.getHours();
   let minutes = now.getMinutes();
-  let month = now.getMonth();
+  let month = now.getMonth() + 1;
   let day = now.getDate();
   return hour + ":" + minutes + " " + month + "/" + day;
 }
